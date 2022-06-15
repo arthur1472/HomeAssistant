@@ -37,15 +37,3 @@ action:
                 - service: light.turn_off
                   target:
                     entity_id: "light.{{ repeat.item }}"
-#      - conditions:
-#          - '{{ command == ''double'' }}'
-#        sequence: !input 'button_double_press'
-#      - conditions:
-#          - '{{ command == ''hold'' }}'
-#        sequence: !input 'button_long_press'
-#      - conditions:
-#          - '{{ command == ''rotate_right'' }}'
-#        sequence: !input 'button_rotate_right'
-#      - conditions:
-#          - '{{ command == ''rotate_left'' }}'
-#        sequence: !input 'button_rotate_left'
