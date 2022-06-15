@@ -1,0 +1,69 @@
+blueprint:
+  name: Zigbee2MQTT - Tuya Moes Smart Knob event mode
+  description: Automate your Tuya Smart Knob - ERS-10TZBVK-AA
+  domain: automation
+  input:
+    switch:
+      name: Tuya Smart Knob
+      description: Tuya Smart Knob used as Button
+      selector:
+        entity:
+          integration: mqtt
+          domain: device
+          multiple: false
+    button_short_press:
+      name: Single Press
+      description: Action to run on single press (careful not to turn knob instead)
+      default: []
+      selector:
+        action: {}
+    button_double_press:
+      name: Double Press
+      description: Action to run on double press (careful not to turn knob instead)
+      default: []
+      selector:
+        action: {}
+    button_long_press:
+      name: Long Press
+      description: Action to run on long press (at least 4 seconds - careful not to turn knob instead)
+      default: []
+      selector:
+        action: {}
+    button_rotate_right:
+      name: Rotate Right
+      description: Action to run when Smart Knob is rotated right
+      default: []
+      selector:
+        action: {}
+    button_rotate_left:
+      name: Rotate Left
+      description: Action to run when Smart Knob is rotated left
+      default: []
+      selector:
+        action: {}
+  source_url: https://community.home-assistant.io/t/zigbee2mqtt-tuya-moes-smart-knob-ers-10tzbvk-aa/419989
+mode: restart
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: !input 'switch'
+    attribute: action
+action:
+  - variables:
+      command: '{{ trigger.to_state.state }}'
+  - choose:
+      - conditions:
+          - '{{ command == ''single'' }}'
+        sequence: !input 'button_short_press'
+      - conditions:
+          - '{{ command == ''double'' }}'
+        sequence: !input 'button_double_press'
+      - conditions:
+          - '{{ command == ''hold'' }}'
+        sequence: !input 'button_long_press'
+      - conditions:
+          - '{{ command == ''rotate_right'' }}'
+        sequence: !input 'button_rotate_right'
+      - conditions:
+          - '{{ command == ''rotate_left'' }}'
+        sequence: !input 'button_rotate_left'
