@@ -8,8 +8,16 @@ blueprint:
       description: Tuya Smart Knob used as Button
       selector:
         entity:
-          domain: device
+          integration: mqtt
+          domain: sensor
           multiple: false
+    ligths:
+      name: Lights to control
+      description: These are the lights you want to control
+      selector:
+        entity:
+          domain: light
+          multiple: true
     button_short_press:
       name: Single Press
       description: Action to run on single press (careful not to turn knob instead)
@@ -46,7 +54,6 @@ max_exceeded: silent
 trigger:
   - platform: state
     entity_id: !input 'switch'
-    attribute: action
 action:
   - variables:
       command: '{{ trigger.to_state.state }}'
