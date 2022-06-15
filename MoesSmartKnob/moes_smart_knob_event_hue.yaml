@@ -11,7 +11,7 @@ blueprint:
           integration: mqtt
           domain: sensor
           multiple: false
-    ligths:
+    lights:
       name: Lights to control
       description: These are the lights you want to control
       selector:
