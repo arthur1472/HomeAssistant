@@ -32,8 +32,7 @@ action:
           - '{{ command == ''single'' }}'
         sequence:
           - repeat:
-              for_each:
-                - !input 'lights'
+              for_each: !input 'lights'
               sequence:
                 - service: light.turn_off
                   target:
