@@ -65,6 +65,7 @@ action:
               for_each: !input 'lights'
               sequence:
                 - service: light.turn_off
+                  data: {}
                   target:
                     entity_id: "{{ repeat.item }}"
       - conditions:
