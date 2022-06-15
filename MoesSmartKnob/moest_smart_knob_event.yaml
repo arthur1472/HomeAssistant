@@ -8,7 +8,6 @@ blueprint:
       description: Tuya Smart Knob used as Button
       selector:
         entity:
-          integration: mqtt
           domain: device
           multiple: false
     button_short_press:
